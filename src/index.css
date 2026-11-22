@@ -1,0 +1,427 @@
+@import "tailwindcss";
+
+:root {
+  --bg1: #1b1350;
+  --bg2: #0f1d48;
+  --bg3: #0a1633;
+  --panel: rgba(255, 255, 255, 0.075);
+  --panel2: rgba(255, 255, 255, 0.125);
+  --line: rgba(255, 255, 255, 0.16);
+  --text: #ffffff;
+  --muted: #c9d1ff;
+  --gold: #ffc93c;
+  --ok: #21d07a;
+  --bad: #ff4d6a;
+  --e1: #ff8a00;
+  --e2: #10c98f;
+  --e3: #9b6bff;
+  --e4: #22b8f0;
+  --e5: #ff4d7e;
+  --optA: #e8384f;
+  --optB: #2f80ed;
+  --optC: #f5a70d;
+  --optD: #17a866;
+  --font-sans: "Noto Sans", "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Noto Serif", Georgia, Cambria, "Times New Roman", serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--text);
+  font-size: 18px;
+  line-height: 1.45;
+  background: #0f1d48;
+  -webkit-font-smoothing: antialiased;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='.045' stroke-width='2'%3E%3Cpath d='M40 12c18 0 27 17 20 32S35 63 25 54s-3-23 9-23c9 0 11 9 4 12'/%3E%3Cpath d='M95 70c14 0 21 13 16 25s-20 15-28 8-2-18 7-18c7 0 9 7 3 9'/%3E%3C/g%3E%3C/svg%3E"),
+    radial-gradient(circle at 12% 18%, rgba(255, 138, 0, 0.28), transparent 38%),
+    radial-gradient(circle at 88% 12%, rgba(155, 107, 255, 0.34), transparent 42%),
+    radial-gradient(circle at 75% 92%, rgba(255, 77, 126, 0.26), transparent 42%),
+    radial-gradient(circle at 18% 88%, rgba(34, 184, 240, 0.26), transparent 40%),
+    linear-gradient(160deg, var(--bg1), var(--bg2) 60%, var(--bg3));
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.font-serif-literary {
+  font-family: var(--font-serif);
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes pulseRing {
+  0%,
+  100% {
+    box-shadow: 0 0 0 6px color-mix(in srgb, var(--c) 35%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 0 14px color-mix(in srgb, var(--c) 10%, transparent);
+  }
+}
+
+@keyframes shakeTimer {
+  0%,
+  100% {
+    transform: none;
+  }
+  25% {
+    transform: translateX(-2px);
+  }
+  75% {
+    transform: translateX(2px);
+  }
+}
+
+@keyframes popChoice {
+  50% {
+    transform: scale(1.03);
+  }
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.88);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.86);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes risePodium {
+  from {
+    opacity: 0;
+    transform: translateY(56px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease both;
+}
+
+.animate-popIn {
+  animation: popIn 0.45s cubic-bezier(0.2, 0.9, 0.2, 1.15) both;
+}
+
+.animate-zoomIn {
+  animation: zoomIn 0.45s cubic-bezier(0.2, 0.9, 0.2, 1.1) both;
+}
+
+.animate-popChoice {
+  animation: popChoice 0.38s ease;
+}
+
+.animate-shake {
+  animation: shakeTimer 0.5s infinite;
+}
+
+.animate-rise {
+  animation: risePodium 0.75s cubic-bezier(0.2, 0.9, 0.2, 1.1) both;
+}
+
+/* 3D card flip */
+.perspective-800 {
+  perspective: 800px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+/* Literary map */
+.map {
+  position: relative;
+  min-width: 680px;
+  --namesH: 118px;
+  --dot: 58px;
+}
+
+.map.compact {
+  --namesH: 0px;
+  --dot: 34px;
+  min-width: 520px;
+}
+
+.road {
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  top: calc(var(--namesH) + var(--dot) / 2 - 7px);
+  height: 14px;
+  border-radius: 99px;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.18) 0 18px,
+    rgba(255, 255, 255, 0.07) 18px 30px
+  );
+}
+
+.map.compact .road {
+  height: 8px;
+  top: calc(var(--dot) / 2 - 4px);
+}
+
+.road-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--e1), var(--e2), var(--e3), var(--e4), var(--e5));
+  background-size: calc(100% * 100 / var(--fillpct, 100)) 100%;
+  box-shadow: 0 0 18px rgba(255, 201, 60, 0.5);
+  transition: width 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.st-dot {
+  width: var(--dot);
+  height: var(--dot);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  font-size: 22px;
+  position: relative;
+  z-index: 1;
+  background: #2a2f63;
+  border: 4px solid rgba(255, 255, 255, 0.25);
+  transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+}
+
+.map.compact .st-dot {
+  font-size: 15px;
+  border-width: 3px;
+}
+
+.station.on .st-dot {
+  background: var(--c);
+  border-color: #fff;
+  box-shadow:
+    0 0 0 6px color-mix(in srgb, var(--c) 30%, transparent),
+    0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+.station.current .st-dot {
+  transform: scale(1.18);
+  animation: pulseRing 1.6s infinite;
+}
+
+button.station:hover .st-dot {
+  transform: translateY(-3px);
+}
+
+/* Illustration Ribbon alternating tilt */
+.ill-ribbon-card:nth-child(odd) {
+  transform: rotate(-2.2deg);
+}
+
+.ill-ribbon-card:nth-child(even) {
+  transform: rotate(2.2deg) translateY(5px);
+}
+
+.ill-ribbon-card:hover {
+  transform: scale(1.05);
+}
+
+/* Toggle Switch */
+.switch {
+  position: relative;
+  width: 46px;
+  height: 26px;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.switch span {
+  position: absolute;
+  inset: 0;
+  background: #4a4f7a;
+  border-radius: 99px;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.switch span::before {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border-radius: 50%;
+  transition: 0.2s;
+}
+
+.switch input:checked + span {
+  background: var(--ok);
+}
+
+.switch input:checked + span::before {
+  transform: translateX(20px);
+}
+
+/* Print Diploma */
+#diploma {
+  display: none;
+}
+
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 10mm;
+  }
+  body {
+    background: #fff !important;
+  }
+  body::before {
+    display: none !important;
+  }
+  #root {
+    display: none !important;
+  }
+  #diploma {
+    display: block !important;
+    color: #1b1b3a;
+    font-family: var(--font-serif);
+  }
+  .dip {
+    border: 10px double #c8961e;
+    border-radius: 18px;
+    padding: 34px 46px;
+    text-align: center;
+    min-height: 180mm;
+    position: relative;
+  }
+  .dip .orn {
+    font-size: 22px;
+    letter-spacing: 10px;
+    color: #c8961e;
+  }
+  .dip h1 {
+    font-size: 64px;
+    margin: 6px 0 0;
+    letter-spacing: 8px;
+    color: #7a2e8c;
+  }
+  .dip .sub {
+    font-size: 20px;
+    margin-top: 6px;
+    font-family: var(--font-sans);
+  }
+  .dip .who {
+    font-size: 46px;
+    font-weight: 900;
+    margin: 26px 0 6px;
+    color: #0e4d8f;
+    border-bottom: 2px solid #c8961e;
+    display: inline-block;
+    padding: 0 30px 6px;
+  }
+  .dip .txt {
+    font-size: 20px;
+    line-height: 1.6;
+    margin: 14px auto;
+    max-width: 200mm;
+    font-family: var(--font-sans);
+  }
+  .dip .score {
+    font-size: 30px;
+    font-weight: 900;
+    color: #b5172e;
+  }
+  .dip .sig {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+    font-size: 17px;
+    font-family: var(--font-sans);
+  }
+  .dip .sig div {
+    border-top: 1px solid #333;
+    padding-top: 6px;
+    min-width: 70mm;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

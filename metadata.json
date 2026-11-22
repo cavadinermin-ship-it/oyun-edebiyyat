@@ -1,0 +1,6 @@
+{
+  "name": "Söz sənətimizin izi ilə",
+  "description": "X sinif Azərbaycan ədəbiyyatı üzrə interaktiv yarış və məşq oyunu",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
