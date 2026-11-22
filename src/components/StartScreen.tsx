@@ -41,7 +41,7 @@ export function StartScreen({
   return (
     <section className="animate-fadeIn">
       <div className="text-center px-2.5 pt-4 pb-2">
-        <h1 className="font-serif-literary m-0 text-[clamp(36px,5.8vw,72px)] leading-[1.06] font-bold tracking-tight bg-gradient-to-r from-[#FFB547] via-[#FF6B8B] via-[#B18CFF] via-[#4FD1FF] to-[#3DDC97] bg-clip-text text-transparent drop-shadow-[0_4px_18px_rgba(0,0,0,0.25)]">
+        <h1 className="font-serif-literary m-0 text-[clamp(36px,5.8vw,72px)] leading-[1.06] font-bold tracking-tight bg-[linear-gradient(90deg,#FFB547,#FF6B8B,#B18CFF,#4FD1FF,#3DDC97)] bg-clip-text text-transparent drop-shadow-[0_4px_18px_rgba(0,0,0,0.25)]">
           Söz sənətimizin izi ilə
         </h1>
         <p className="mt-2.5 mb-0 text-[#c9d1ff] text-[clamp(17px,2vw,22px)]">
